@@ -1,0 +1,64 @@
+<form method="POST" [formGroup]="custDocForm" (submit)="onSubmit()">
+
+    <div class="templt-pg-sec">
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+                <div class="esign-boxes-top docu-new-sec">
+                    <div class="esign-last-frm doc-file-nm">
+                        <div class="form-group">
+                            <label class="col-lg-12 col-xs-12 pull-left">Customer Name</label>
+                            <input type="text" class="form-field col-lg-5 col-sm-8 col-xs-12 pull-left"
+                                formControlName="customerName" placeholder="Customer Name"
+                                [(ngModel)]="model.customerName">
+
+                            <div *ngIf="isSubmitted && (custForm.customerName.errors || custForm.customerName.dirty || custForm.customerName.touched)"
+                                class="invalid-feedback error-class">
+                                <div *ngIf="custForm.customerName.errors?.required">
+                                    Customer Name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-12 col-md-12 col-xs-12 pull-left">
+                    <h3 class="title-esign"><span>Add Document </span>
+                        <button title="Add Doc" type="button" class="add-btn-last" (click)="onAddDoc()"><i
+                                class="fa fa-plus-circle" aria-hidden="true"></i> + </button>
+                    </h3>
+                    <div formArrayName="documents" id="sortable">
+                        <div *ngFor="let recipient of documentForm.controls; let i=index;" [formGroupName]="i"
+                            [attr.data-id]="getCustomerFormGroup(i).controls['orderNumber'].value">
+                            <div class="row ui-state-default">
+                                <div class="move-ico">
+                                    <img src="../../assets/images/move.png" class="img-icn">
+                                    <input type="text" class="txt-cls" disabled formControlName="orderNumber">
+
+                                    <input type="text" class="txt-cls" placeholder="Document Name"
+                                        formControlName="docName">
+                                    <div *ngIf="isSubmitted" class="invalid-feedback error-class">
+                                        <div *ngIf="getCustomerFormGroup(i).controls['docName'].hasError('required')">
+                                            Document Name is required
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button type="submit">Submit Customer </button>
+
+
+        </div>
+    </div>
+
+</form>

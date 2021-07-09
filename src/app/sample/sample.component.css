@@ -1,0 +1,14 @@
+.error-class
+{
+    font: bolder;
+    color: red;
+}
+.img-icn
+{
+    height: 21px;
+    width: 21px;
+}
+.txt-cls{
+    height: 30px;
+    margin-left: 5px;
+}
